@@ -2,10 +2,10 @@
 
 var Quarter = function() {
     var month = new Month(),
-        year = new Year();
+        yearObj = new Year();
 
     this.getCurrentQuarter = function () {
-        return Math.floor((month.getCurrentMonth() + 3) / 3);
+        return Math.floor((month.getCurrentMonth().value + 3) / 3);
     }
 
     this.quarters = [
@@ -19,16 +19,16 @@ var Quarter = function() {
         var result;
 
         this.quarters.forEach(function (quarter) {
-            if(quarter.lastMonth < 9)
+            if(quarter.lastMonth < month.getCurrentMonth().value)
                 result = quarter.quarter;
         });
 
         return result;
     }
 
-    this.getDropdownElements = function (all) {
+    this.getDropdownElements = function (year) {
         var result = [],
-            limit = all ? 4 : this.getCurrentQuarter();
+            limit = year < yearObj.getCurrentYear() || !year ? 4 : this.getLastFinishedQuarter();
         for (var i = 1; i <= limit; i++) {
             result.push('Q' + i);
         }
