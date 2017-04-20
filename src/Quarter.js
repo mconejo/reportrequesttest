@@ -28,9 +28,9 @@ var Quarter = function() {
 
     this.getDropdownElements = function (year) {
         var result = [],
-            limit = year < yearObj.getCurrentYear() || !year ? 4 : this.getLastFinishedQuarter();
+            limit = year < yearObj.getCurrentYear() || !year || isNaN(year) ? 4 : this.getLastFinishedQuarter();
         for (var i = 1; i <= limit; i++) {
-            result.push('Q' + i);
+            result.push({'name' : 'Q' + i , 'value': i});
         }
         return result;
     }

@@ -35,7 +35,7 @@ var Month = function() {
         if(year > yearObj.getCurrentYear()){
             throw 'Year is not valid';
         } else {
-            var limit = year < yearObj.getCurrentYear() || !year ? 11 : this.getCurrentMonth(true).value;
+            var limit = year < yearObj.getCurrentYear() || !year || isNaN(year) ? 11 : this.getCurrentMonth(true).value;
 
             return this.getMonthArray(limit);
         }
